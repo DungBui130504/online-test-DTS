@@ -1,0 +1,11 @@
+{
+  "name": "server-admin",
+  "username": "admin",
+  "password": "$2b$10$feNoP.0c7.ITKEp1fsWSou29Rl3IDNzKikFThUN0n/uZX3sgbDohi",
+  "email": "admin@gmail.com",
+  "phone": "0123456789",
+  "avatar": "https://mir-s3-cdn-cf.behance.net/project.jpg",
+  "status": 1,
+  "isDeleted": false,
+  "role": "admin"
+}

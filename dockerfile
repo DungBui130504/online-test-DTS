@@ -11,3 +11,7 @@ COPY . .
 EXPOSE 3001
 
 CMD ["node", "server.js"]
+
+#docker build -t <app-name> .
+
+#docker run -p <app-name>

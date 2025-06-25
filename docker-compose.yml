@@ -1,10 +1,52 @@
-version: "3.8"
+version: "3"
 
 services:
+  mongo:
+    image: mongo:latest
+    container_name: database_container
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - mongo:/data/db
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_ADMINUSERNAME: root      
+      ME_CONFIG_MONGODB_ADMINPASSWORD: example    
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: "true"
+      ME_CONFIG_BASICAUTH: "true"
+    depends_on:
+      - mongo
+
   app:
     build: .
     ports:
       - "3001:3001"
-    env_file:
-      - .env
-    restart: always
+    environment:
+      MONGO_SERVER: mongodb://root:example@mongo:27017/UserManagement?authSource=admin
+    depends_on:
+      - mongo
+
+volumes:
+  mongo: {}
+
+ 
+#docker compose down --volumes --remove-orphans
+#docker rmi mongo-express
+
+#docker compose down
+#docker compose up --build
+
+#docker pull mongo:latest
+
+#docker compose up 

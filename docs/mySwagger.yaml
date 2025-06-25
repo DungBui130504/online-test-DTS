@@ -104,14 +104,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/UserInput" # 👈 Schema đầu vào (không nên bao gồm isDeleted, status, role)
+              $ref: "#/components/schemas/UserInput"
       responses:
-        "200": # 👈 Trả về 200 OK
+        "200":
           description: User created successfully
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User" # 👈 Schema đầu ra đầy đủ (có cả role, status...)
+                $ref: "#/components/schemas/User"
         "400":
           description: Invalid input
         "401":
