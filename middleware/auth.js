@@ -6,7 +6,7 @@ function authenticateToken(req, res, next) {
     const token = authHeader && authHeader.split(' ')[1];
 
     if (!token) {
-        return res.status(401).json({ message: 'Not authorization' });
+        return res.status(401).json({ message: 'Unauthorized - Missing or invalid token' });
     }
 
     try {
@@ -14,14 +14,14 @@ function authenticateToken(req, res, next) {
         req.user = decoded; // Lưu thông tin user vào request
         next();
     } catch (err) {
-        return res.status(403).json({ message: 'Token is not accepted' });
+        return res.status(403).json({ message: 'Forbidden - admin only' });
     }
 }
 
 function authorizeUser(roles) {
     return (req, res, next) => {
         if (!roles.includes(req.user.role)) {
-            return res.status(403).json({ message: "Access denied" });
+            return res.status(403).json({ message: "Forbidden - admin only" });
         }
         next();
     };

@@ -47,7 +47,11 @@ exports.register = async (req, res) => {
         res.status(201).json(result);
 
     } catch (error) {
-        res.status(500).json({ message: 'Server error', error: error });
+        res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message || 'Something went wrong',
+            code: 500
+        });
     }
 }
 
@@ -94,7 +98,11 @@ exports.login = async (req, res) => {
             accessToken: accessToken
         });
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message || 'Something went wrong',
+            code: 500
+        });
     }
 }
 
@@ -109,7 +117,11 @@ exports.logout = async (req, res) => {
             message: "logout success"
         });
     } catch (error) {
-        res.status(500).json('Server error');
+        res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message || 'Something went wrong',
+            code: 500
+        });
     }
 }
 
@@ -133,6 +145,10 @@ exports.renewToken = async (req, res) => {
             accessToken: newAccessToken
         });
     } catch (error) {
-        res.status(500).json('Server error');
+        res.status(500).json({
+            error: 'Internal Server Error',
+            message: error.message || 'Something went wrong',
+            code: 500
+        });
     }
 }

@@ -1,0 +1,542 @@
+openapi: 3.0.4
+info:
+  title: Intern Test DTS
+  description: |-
+    **This is an online test organized by _DTS Communication Technology Joint Stock Company_ as part of the _Fresher Developer 2025_ program.**
+
+    **Assignment:** Develop a REST API for user management.
+
+    **Technologies to be used:**
+    - JavaScript, Node.js  
+    - MongoDB  
+    - Docker  
+    - GitHub
+
+    **Participant:** Bui Xuan Dung.
+
+    **Email:** buixuandung13052004@gmail.com
+
+    Source code link: [Go to my Github](https://github.com/DungBui130504/online-test-DTS.git)
+
+  version: 1.0.0
+servers:
+  - url: http://localhost:3001/api/v1
+tags:
+  - name: admin
+    description: For admin of server
+    externalDocs:
+      description: Find out more
+      url: https://github.com/DungBui130504/online-test-DTS.git
+  - name: user
+    description: For accountless & unlogin users
+    externalDocs:
+      description: Find out more
+      url: https://github.com/DungBui130504/online-test-DTS.git
+  - name: client
+    description: For logined users
+    externalDocs:
+      description: Find out more
+      url: https://github.com/DungBui130504/online-test-DTS.git
+paths:
+  /admin/allusers:
+    get:
+      tags:
+        - admin
+      summary: Get all users
+      description: Only accessible by admin
+      operationId: getUsers
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Successful getting all users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+        "403":
+          description: Forbidden - admin only
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /admin/auser/{id}:
+    get:
+      tags:
+        - admin
+      summary: Get a user by ID
+      description: Only accessible by admin
+      operationId: getAUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the user to retrieve
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "404":
+          description: User not found
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /admin/adduser:
+    post:
+      tags:
+        - admin
+      summary: Add a new user
+      description: Only accessible by admin
+      operationId: addUser
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        description: User information to create
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInput" # 👈 Schema đầu vào (không nên bao gồm isDeleted, status, role)
+      responses:
+        "200": # 👈 Trả về 200 OK
+          description: User created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User" # 👈 Schema đầu ra đầy đủ (có cả role, status...)
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized - Missing or invalid token
+        "403":
+          description: Forbidden - Admin only
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /admin/updateuser:
+    put:
+      tags:
+        - admin
+      summary: Update a user
+      description: Only accessible by admin
+      operationId: updateUser
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        description: User information to update
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserUpdateInput"
+      responses:
+        "200":
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized - Missing or invalid token
+        "403":
+          description: Forbidden - Admin only
+        "404":
+          description: User not found
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /admin/restoreuser/{id}:
+    put:
+      tags:
+        - admin
+      summary: Restore a soft-deleted user
+      description: Restore user by setting isDeleted to false. Only accessible by admin.
+      operationId: restoreUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the user to restore
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User restored successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid user ID
+        "404":
+          description: User not found
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /admin/deleteuser/{id}:
+    delete:
+      tags:
+        - admin
+      summary: Soft-delete a user
+      description: Mark user as deleted by setting isDeleted to true. Only accessible by admin.
+      operationId: deleteUser
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the user to delete
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User deleted successfully (soft-delete)
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: User deleted successfully
+        "400":
+          description: Invalid user ID
+        "404":
+          description: User not found
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /user/register:
+    post:
+      tags:
+        - user
+      summary: Register a new user
+      description: Allows a new user to register. No authentication required.
+      operationId: registerUser
+      requestBody:
+        required: true
+        description: Information for user registration
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserInput"
+      responses:
+        "201":
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid input (missing required fields or bad format)
+        "409":
+          description: Conflict - Username or name already exists
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /user/login:
+    post:
+      tags:
+        - user
+      summary: Login a user
+      description: Login with username and password. Returns token and user info.
+      operationId: loginUser
+      requestBody:
+        required: true
+        description: Login credentials
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - username
+                - password
+              properties:
+                username:
+                  type: string
+                password:
+                  type: string
+      responses:
+        "200":
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Login success
+                  id:
+                    type: string
+                    example: 60a7f0b6c25e4e23a8c3a123
+                  isAdmin:
+                    type: boolean
+                    example: false
+                  name:
+                    type: string
+                    example: Nguyen Van A
+                  avatar:
+                    type: string
+                    example: https://example.com/avatar.jpg
+                  accessToken:
+                    type: string
+                    description: JWT token
+        "400":
+          description: Missing credentials
+        "401":
+          description: Unauthorized - Invalid credentials
+        "404":
+          description: User not found
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /user/logout:
+    post:
+      tags:
+        - user
+      summary: Logout user
+      description: Clear the refresh token cookie to logout the user.
+      operationId: logoutUser
+      responses:
+        "200":
+          description: Logout successful
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: logout success
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /user/renewtoken:
+    post:
+      tags:
+        - user
+      summary: Renew access token using refresh token
+      description: This endpoint issues a new access token if a valid refresh token is present in cookies.
+      operationId: renewAccessToken
+      responses:
+        "200":
+          description: Token renewed successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: renew access token successed
+                  accessToken:
+                    type: string
+                    description: Newly generated access token
+        "401":
+          description: Unauthorized - Missing or invalid refresh token
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /client/getyourinfor:
+    get:
+      tags:
+        - client
+      summary: Get current user information
+      description: Returns user information extracted from the access token.
+      operationId: getClientInfo
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: User information retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid user ID
+        "401":
+          description: Unauthorized - Missing or invalid access token
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /client/updateyourinfor:
+    put:
+      tags:
+        - client
+      summary: Update current user information
+      description: Allows a logged-in user to update their personal information.
+      operationId: updateClientInfo
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserUpdateInput"
+      responses:
+        "200":
+          description: User updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: Invalid input
+        "401":
+          description: Unauthorized - Missing or invalid token
+        "404":
+          description: User not found
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+  /client/deleteyouraccount:
+    delete:
+      tags:
+        - client
+      summary: Delete current user account
+      description: Soft delete the logged-in user's account (sets isDeleted to true).
+      operationId: deleteClientAccount
+      security:
+        - bearerAuth: []
+      responses:
+        "200":
+          description: Account deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Account deleted successfully
+        "401":
+          description: Unauthorized - Missing or invalid token
+        "404":
+          description: User not found or already deleted
+        "500":
+          $ref: "#/components/responses/ServerError"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    User:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        avatar:
+          type: string
+        status:
+          type: integer
+          enum: [0, 1]
+          description: 1 = active, 0 = inactive
+          default: 1
+        isDeleted:
+          type: boolean
+          default: false
+        role:
+          type: string
+          enum: [client, admin]
+          default: client
+
+    UserInput:
+      type: object
+      required:
+        - name
+        - username
+        - password
+        - email
+      properties:
+        name:
+          type: string
+        username:
+          type: string
+        password:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        avatar:
+          type: string
+        role:
+          type: string
+
+    UserUpdateInput:
+      type: object
+      required:
+        - id
+      properties:
+        id:
+          type: string
+          description: ID of the user to update
+        name:
+          type: string
+        username:
+          type: string
+        email:
+          type: string
+          format: email
+        phone:
+          type: string
+        avatar:
+          type: string
+        status:
+          type: integer
+          enum: [0, 1]
+        role:
+          type: string
+          enum: [client, admin]
+
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+          example: Internal Server Error
+        message:
+          type: string
+          example: Something went wrong
+        code:
+          type: integer
+          example: 500
+
+  responses:
+    ServerError:
+      description: Internal server error
+      content:
+        application/json:
+          schema:
+            $ref: "#/components/schemas/ErrorResponse"

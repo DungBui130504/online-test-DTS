@@ -1,0 +1,3 @@
+apis:
+  me-swagger.yaml:
+    alias: intern-test-dts
