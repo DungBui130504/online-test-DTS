@@ -54,7 +54,7 @@ npm install
 PORT=<server_port>
 secret_access_token_key=<private_key_for_access_token>
 secret_refresh_token_key=<private_key_for_refresh_token>
-MONGO_SERVER=mongodb://mongo_db:27017/<your_database_name>
+MONGO_SERVER=mongodb://mongo_db:27017/<your_database_name> # nên đặt: UserManagement
 ```
 
 ### 3. Mở Docker Desktop và MongoDB Compass
@@ -77,6 +77,9 @@ docker compose up --build
 - Khi truy cập Mongo Express, sử dụng thông tin đăng nhập:
   - **Tài khoản:** `admin`
   - **Mật khẩu:** `pass`
+-  Trên Mongo Express:
+  - Tạo 1 database trùng với tên database trong file .env (nên tạo: UserManagement).
+  - Tạo 1 collection trong datase (nên tạo: Users).
 
  ## 🛠️ Các API chính
 
