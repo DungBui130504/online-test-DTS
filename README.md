@@ -44,7 +44,8 @@ git clone https://github.com/DungBui130504/online-test-DTS.git
 ### 2. Cài đặt thư viện và biến môi trường
 
 - Mở project vừa clone bằng Visual Studio Code.
-- Cài đặt các thư viện cần thiết:
+- Mở terminal trong Visual Studio Code (nhấn Ctrl + ` hoặc Ctrl + J).
+- Cài đặt các thư viện cần thiết, nhập lệnh:
 ```bash
 npm install
 ```
