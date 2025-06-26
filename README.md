@@ -80,6 +80,7 @@ docker compose up --build
 - Trên Mongo Express:
   - Tạo 1 database trùng với tên database trong file .env (nên tạo: UserManagement).
   - Tạo 1 collection trong database (nên tạo: Users).
+  - Copy nội dung file Admin.User.json trong project và thêm vào collection để tạo dữ liệu mẫu.
 
  ## 🛠️ Các API chính
 
