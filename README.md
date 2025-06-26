@@ -116,7 +116,7 @@ docker compose up --build
 
 ## Hướng dẫn khắc phục lỗi
 
-**Lưu ý** hãy làm đúng và đủ các bước theo hướng dẫn.  
+**Lưu ý:** hãy làm đúng và đủ các bước theo hướng dẫn.  
 Hướng dẫn fix một số lỗi:
 
 - ❌ Không build được mongo image: hãy thử chạy lệnh sau để tải thủ công image Mongo rồi build lại project:
