@@ -129,3 +129,4 @@ Hướng dẫn fix một số lỗi:
   1. Truy cập `chrome://net-internals/#hsts` trên trình duyệt Chrome.
   2. Tại mục **"Delete domain security policies"**, nhập `localhost` và nhấn **Delete**.
   3. Chi tiết lỗi xem tại: [https://stackoverflow.com/questions/25277457/google-chrome-redirecting-localhost-to-https](https://stackoverflow.com/questions/25277457/google-chrome-redirecting-localhost-to-https)
+  4. Cách đơn giản nhất: truy cập bằng trinh duyệt ẩn danh.
