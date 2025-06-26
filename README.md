@@ -16,12 +16,12 @@
 
 ---
 
-## 📚 Table of Contents
+## 📑 Table of Contents
 
-1. [📦 Các phần mềm cần cài đặt](#cac-phan-mem-can-cai-dat)
-2. [⚙️ Cách cài đặt và chạy project](#cach-cai-dat-va-chay-project)
-3. [🛠️ Các API chính](#cac-api-chinh)
-4. [⚠️ Hướng dẫn khắc phục lỗi](#huong-dan-khac-phuc-loi)
+1. [📦 Các phần mềm cần cài đặt](#các-phần-mềm-cần-cài-đặt)  
+2. [⚙️ Cách cài đặt và chạy project](#cách-cài-đặt-và-chạy-project)  
+3. [🛠️ Các API chính](#các-api-chính)  
+4. [⚠️ Hướng dẫn khắc phục lỗi](#hướng-dẫn-khắc-phục-lỗi)  
 
 ---
 
