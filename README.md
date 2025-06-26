@@ -77,9 +77,9 @@ docker compose up --build
 - Khi truy cập Mongo Express, sử dụng thông tin đăng nhập:
   - **Tài khoản:** `admin`
   - **Mật khẩu:** `pass`
--  Trên Mongo Express:
+- Trên Mongo Express:
   - Tạo 1 database trùng với tên database trong file .env (nên tạo: UserManagement).
-  - Tạo 1 collection trong datase (nên tạo: Users).
+  - Tạo 1 collection trong database (nên tạo: Users).
 
  ## 🛠️ Các API chính
 
