@@ -18,14 +18,14 @@
 
 ## 📑 Table of Contents
 
-1. [📦 Các phần mềm cần cài đặt](#các-phần-mềm-cần-cài-đặt)  
-2. [⚙️ Cách cài đặt và chạy project](#cách-cài-đặt-và-chạy-project)  
-3. [🛠️ Các API chính](#các-api-chính)  
-4. [⚠️ Hướng dẫn khắc phục lỗi](#hướng-dẫn-khắc-phục-lỗi)  
+1. [Các phần mềm cần cài đặt](#các-phần-mềm-cần-cài-đặt)  
+2. [Cách cài đặt và chạy project](#cách-cài-đặt-và-chạy-project)  
+3. [Các API chính](#các-api-chính)  
+4. [Hướng dẫn khắc phục lỗi](#hướng-dẫn-khắc-phục-lỗi)  
 
 ---
 
-## 📦 Các phần mềm cần cài đặt
+## Các phần mềm cần cài đặt
 
 | Tên phần mềm      | Link tải                                                 |
 |-------------------|----------------------------------------------------------|
@@ -36,7 +36,7 @@
 
 ---
 
-## ⚙️ Cách cài đặt và chạy project
+## Cách cài đặt và chạy project
 
 ### 1. Clone repository
 ```bash
@@ -88,7 +88,7 @@ docker compose up --build
 
 ---
 
-## 🛠️ Các API chính
+## Các API chính
 
 ### /admin: quản trị viên server
 - `GET /admin/allusers` - Lấy danh sách tất cả người dùng
@@ -111,7 +111,7 @@ docker compose up --build
 
 ---
 
-## ⚠️ Hướng dẫn khắc phục lỗi
+## Hướng dẫn khắc phục lỗi
 
 Lưu ý hãy làm đúng và đủ các bước theo hướng dẫn.  
 Hướng dẫn fix một số lỗi:
