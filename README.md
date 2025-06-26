@@ -18,10 +18,10 @@
 
 ## 📑 Table of Contents
 
-1. [Các phần mềm cần cài đặt](#các-phần-mềm-cần-cài-đặt)  
-2. [Cách cài đặt và chạy project](#cách-cài-đặt-và-chạy-project)  
-3. [Các API chính](#các-api-chính)  
-4. [Hướng dẫn khắc phục lỗi](#hướng-dẫn-khắc-phục-lỗi)  
+1.📦 [Các phần mềm cần cài đặt](#các-phần-mềm-cần-cài-đặt)  
+2.⚙️ [Cách cài đặt và chạy project](#cách-cài-đặt-và-chạy-project)  
+3.🛠️ [Các API chính](#các-api-chính)  
+4.⚠️ [Hướng dẫn khắc phục lỗi](#hướng-dẫn-khắc-phục-lỗi)  
 
 ---
 
