@@ -39,7 +39,7 @@
 
 ### 1. Clone repository
 ```bash
-git clone https://github.com/your-username/online-test-DTS.git
+git clone https://github.com/DungBui130504/online-test-DTS.git
 ```
 ### 2. Cài đặt thư viện và biến môi trường
 
