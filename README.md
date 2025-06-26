@@ -40,7 +40,6 @@
 ### 1. Clone repository
 ```bash
 git clone https://github.com/your-username/online-test-DTS.git
-cd online-test-DTS
 ```
 ### 2. Cài đặt thư viện và biến môi trường
 
