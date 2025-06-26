@@ -21,6 +21,7 @@
 1. [📦 Các phần mềm cần cài đặt](#-các-phần-mềm-cần-cài-đặt)
 2. [⚙️ Cách cài đặt và chạy project](#️-cách-cài-đặt-và-chạy-project)
 3. [🛠️ Các API chính](#️-các-api-chính)
+4. [⚠️ Hướng dẫn khắc phục lỗi](#hướng-dẫn-khắc-phục-lỗi)
 
 ---
 
@@ -103,4 +104,19 @@ docker compose up --build
 - `GET /client/getyourinfor` - Lấy thông tin cá nhân
 - `PUT /client/updateyourinfor` - Cập nhật thông tin cá nhân
 - `DELETE /client/deleteyouraccount` - Xóa tài khoản cá nhân
- 
+
+ ## ⚠️ Hướng dẫn khắc phục lỗi
+
+Lưu ý hãy làm đúng và đủ các bước theo hướng dẫn.  
+Hướng dẫn fix một số lỗi:
+
+- Không build được mongo image: hãy thử chạy lệnh sau để tải thủ công image Mongo rồi build lại project:
+  ```bash
+  docker pull mongo:latest
+  docker compose up --build
+  ```
+
+- Nếu không vào được các đường link [http://localhost:3001/api-docs/v1](http://localhost:3001/api-docs/v1) hoặc [http://localhost:8081](http://localhost:8081), hãy làm như sau:
+  1. Truy cập `chrome://net-internals/#hsts` trên trình duyệt Chrome.
+  2. Tại mục **"Delete domain security policies"**, nhập `localhost` và nhấn **Delete**.
+  3. Chi tiết lỗi xem tại: [https://stackoverflow.com/questions/25277457/google-chrome-redirecting-localhost-to-https](https://stackoverflow.com/questions/25277457/google-chrome-redirecting-localhost-to-https)
